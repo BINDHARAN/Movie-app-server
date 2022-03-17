@@ -3,6 +3,7 @@ import express from "express";
 const app = express();
 import { MongoClient } from "mongodb";
 import dotenv from 'dotenv'
+import cors from "cors";
 // const port = 4000;
 // app.get('/', function (req, res) {
 //     res.send('Hello World ❤')
@@ -13,6 +14,7 @@ import dotenv from 'dotenv'
 // })
 
 dotenv.config()
+app.use(cors());
 
 
 app.use(express.json());
