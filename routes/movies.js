@@ -1,5 +1,5 @@
 import express from 'express';
-import { createMovies, deleteMovieById, editMovieById, getAllMovies, getMovieById } from '../helper.js';
+import { createMovies, deleteMovieById, editMovieById, getAllMovies, getMovieById, deleteAllMovie } from '../helper.js';
 
 
 const routes = express.Router()
@@ -32,6 +32,12 @@ routes.delete("/:id", async function (req, res) {
     const movie = await deleteMovieById(id);
     res.send(movie);
 });
+routes.delete("/", async function (req, res) {
+
+    const movie = await deleteAllMovie();
+    res.send(movie);
+});
+
 
 routes.put("/:id", async function (req, res) {
     // console.log(req.params)

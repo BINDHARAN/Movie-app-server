@@ -20,3 +20,7 @@ export async function editMovieById(id, updateData) {
 export async function deleteMovieById(id) {
     return await client.db("b30wd").collection("movies").deleteOne({ id });
 }
+
+export async function deleteAllMovie() {
+    return await client.db("b30wd").collection("movies").deleteMany({});
+}
