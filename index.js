@@ -4,7 +4,9 @@ const app = express();
 import { MongoClient } from "mongodb";
 import dotenv from 'dotenv'
 import cors from "cors";
-import { moviesRoutes } from "./routes/movies.js";
+import { moviesRoutes } from './routes/movies.js'
+
+
 // const port = 4000;
 // app.get('/', function (req, res) {
 //     res.send('Hello World ❤')
