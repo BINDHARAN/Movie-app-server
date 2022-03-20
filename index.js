@@ -4,7 +4,7 @@ const app = express();
 import { MongoClient } from "mongodb";
 import dotenv from 'dotenv'
 import cors from "cors";
-import { moviesRouter } from "./routes/movies.js";
+import { moviesRoutes } from "./routes/movies.js";
 // const port = 4000;
 // app.get('/', function (req, res) {
 //     res.send('Hello World ❤')
@@ -39,7 +39,7 @@ app.get("/", function (req, res) {
     res.send("Hello World ");
 });
 
-app.use("/movies", moviesRouter)
+app.use("/movies", moviesRoutes)
 
 app.listen(port, () => {
     console.log(`server started at ${port}`);
