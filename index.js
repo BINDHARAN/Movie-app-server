@@ -6,6 +6,7 @@ import dotenv from 'dotenv'
 import cors from "cors";
 import { moviesRoutes } from './routes/movies.js'
 import { userRoutes } from './routes/user.js'
+// import { auth } from "./middleware/auth.js";
 
 
 // const port = 4000;
@@ -18,9 +19,11 @@ import { userRoutes } from './routes/user.js'
 // })
 
 dotenv.config()
+
+//third party middleware
 app.use(cors());
 
-
+// inbuild middleware
 app.use(express.json());
 
 

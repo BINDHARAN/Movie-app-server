@@ -1,6 +1,7 @@
 import express from 'express';
-import { createUser } from '../helper.js';
+import { createUser, getUserByName } from '../helper.js';
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 
 const routes = express.Router()
@@ -25,6 +26,45 @@ routes.post("/signup", async function (request, response) {
     };
     const result = await createUser(newUser);
     response.send(result);
+});
+
+routes.post("/login", async function (request, response) {
+
+    const { username, password } = request.body;
+
+    // db.users.findOne({username: "tamil"})
+    const userFromDB = await getUserByName(username);
+    // username if exist, getuserByName returns userdetails otherwise it return null
+
+    //console.log(userFromDB);
+
+    // response.send(userFromDB)
+
+    // if userFormDB is null
+    if (!userFromDB) {
+        response.status(401).send({ message: "Invalid credentials" })
+    }
+    // if userFormDB is not null
+    else {
+        const storedPassword = userFromDB.password; // hashed password (from db)
+
+        const isPasswordMatch = await bcrypt.compare(password, storedPassword);
+        // comparing user entered password and storedpassword, and it returns true or false
+
+        // console.log("isPasswordMatch", isPasswordMatch);
+
+        // if isPasswordMatch ture
+        if (isPasswordMatch) {
+            const token = jwt.sign({ id: userFromDB._id }, process.env.key)
+            response.send({ message: "Successfull login", token: token })
+        }
+        // else part
+        else {
+            response.status(401).send({ message: "Invalid credentials" })
+        }
+
+    }
+
 });
 
 
